@@ -325,7 +325,7 @@ def build_daily_sheet(wb, date, plates, vehicle_data):
             reading = table_data[i]
             t  = reading['temperature']
             hv = reading['humidity']
-            oor = t is not None and (t <= -9 or t >= 15)
+            oor = t is not None and (t <= 15 or t >= 25)
             rbg = C_RED_BG if oor else ebg
             tfg = C_RED_FG if oor else "000000"
 
@@ -352,7 +352,7 @@ def build_daily_sheet(wb, date, plates, vehicle_data):
     row += max_rows
 
     # ── OOR section ───────────────────────────────────────────────────────────
-    oor_lists = [[r for r in td if r['temperature'] <= -9 or r['temperature'] >= 15]
+    oor_lists = [[r for r in td if r['temperature'] <= 15 or r['temperature'] >= 25]
                  for td in car_td]
 
     if any(oor_lists):
